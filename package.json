@@ -20,6 +20,8 @@
     "dependencies": {
         "@primevue/forms": "^4.2.5",
         "arches": "archesproject/arches#dev/8.0.x",
+        "date-fns": "^4.1.0",
+        "dayjs": "^1.11.13",
         "primevue": "^4.2.5"
     },
     "devDependencies": {
