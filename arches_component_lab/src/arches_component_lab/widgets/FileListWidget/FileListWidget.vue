@@ -5,6 +5,7 @@ import Message from "primevue/message";
 import ProgressSpinner from "primevue/progressspinner";
 
 import FileListWidgetViewer from "@/arches_component_lab/widgets/FileListWidget/components/FileListWidgetViewer.vue";
+import FileListWidgetEditor from "@/arches_component_lab/widgets/FileListWidget/components/FileListWidgetEditor.vue";
 
 import {
     fetchWidgetData,
@@ -36,7 +37,9 @@ onMounted(async () => {
             props.graphSlug,
             props.nodeAlias,
         );
+        console.log("WIDGETDATA", widgetData.value);
         nodeData.value = await fetchNodeData(props.graphSlug, props.nodeAlias);
+        console.log("NODEDATA", nodeData.value);
     } catch (error) {
         configurationError.value = error;
     } finally {
@@ -63,7 +66,15 @@ onMounted(async () => {
             <span v-if="nodeData.isrequired && props.mode === EDIT">*</span>
         </label>
 
-        <div v-if="mode === EDIT"></div>
+        <div v-if="mode === EDIT">
+            <FileListWidgetEditor
+                :initial-value="props.initialValue"
+                :graph-slug="props.graphSlug"
+                :node-alias="props.nodeAlias"
+                :widget-data="widgetData"
+                :node-data="nodeData"
+            />
+        </div>
         <div v-if="mode === VIEW">
             <FileListWidgetViewer
                 :value="initialValue"
