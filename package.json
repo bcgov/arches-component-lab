@@ -18,10 +18,9 @@
         "vitest": "vitest --run --coverage"
     },
     "dependencies": {
-        "@primevue/forms": "4.2.5",
+        "@primevue/forms": "4.3.3",
         "arches": "archesproject/arches#dev/8.0.x",
-        "dayjs": "^1.11.13",
-        "primevue": "4.2.5"
+        "dayjs": "^1.11.13"
     },
     "devDependencies": {
         "arches-dev-dependencies": "archesproject/arches-dev-dependencies#dev/8.0.x"
