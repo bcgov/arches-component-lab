@@ -57,9 +57,18 @@ class WidgetDataView(View):
         datatype = DataTypeFactory().get_instance(card_x_node_x_widget.node.datatype)
         # When dropping support for v7.6, try/except can be removed
         try:
-            response["config"]["defaultValue"] = datatype.get_interchange_value(
-                response["config"].get("defaultValue", None)
-            )
+            # In order to reduce surface area, we're proving out using to_json
+            # to_json assumes you're working with a tile, so we need to mock that
+            node = card_x_node_x_widget.node
+            node_id = str(node.pk)
+            default_value = response["config"].get("defaultValue", None)
+            mock_tile = {
+                "data": {node_id: default_value},
+                "provisionaledits": None,
+            }
+            # breakpoint()
+            newDefaultVal = datatype.to_json(mock_tile, node)
+            response["config"]["defaultValue"] = newDefaultVal
         except AttributeError:
             # Handle the case where the datatype does not have a get_interchange_value method
             pass
