@@ -153,7 +153,6 @@ function deleteImage(fileId: string) {
                 />
             </div>
         </div>
-        currentMax: {{ currentMax }}
         <FileUpload
             accept="image/*"
             :file-limit="currentMax"
