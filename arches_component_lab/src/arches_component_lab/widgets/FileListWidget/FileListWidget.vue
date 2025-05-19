@@ -37,9 +37,7 @@ onMounted(async () => {
             props.graphSlug,
             props.nodeAlias,
         );
-        console.log("WIDGETDATA", widgetData.value);
         nodeData.value = await fetchNodeData(props.graphSlug, props.nodeAlias);
-        console.log("NODEDATA", nodeData.value);
     } catch (error) {
         configurationError.value = error;
     } finally {

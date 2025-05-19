@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { onMounted, useTemplateRef, ref, watch, computed } from "vue";
+import { onMounted, useTemplateRef, ref, computed } from "vue";
 import { useGettext } from "vue3-gettext";
 
 import Message from "primevue/message";
-import FileUpload, {
-    type FileUploadRemoveEvent,
-    type FileUploadSelectEvent,
-} from "primevue/fileupload";
+import FileUpload from "primevue/fileupload";
 import Image from "primevue/image";
 import Button from "primevue/button";
 import { FormField } from "@primevue/forms";
-
+import {
+    type FileUploadRemoveEvent,
+    type FileUploadSelectEvent,
+} from "primevue/fileupload";
 import type { FormFieldResolverOptions } from "@primevue/forms";
 import type { FileReference } from "@/arches_component_lab/widgets/types.ts";
+
 const { $gettext } = useGettext();
 const allowedFileTypes = ref();
 const props = defineProps<{
@@ -38,17 +39,6 @@ const props = defineProps<{
 
 const formFieldRef = useTemplateRef("formFieldRef");
 const currentValues = ref<FileReference[]>();
-
-watch(
-    () => props.initialValue,
-    (newValue) => {
-        if (newValue) {
-            currentValues.value = newValue;
-        } else {
-            currentValues.value = [];
-        }
-    },
-);
 
 onMounted(() => {
     allowedFileTypes.value = props.nodeData.config.imagesOnly ? "image/*" : "*";
@@ -133,12 +123,12 @@ function deleteImage(fileId: string) {
     >
         <div class="uploadedImagesContainer">
             <div
-                v-for="(image, index) in currentValues"
-                :key="index"
+                v-for="image in currentValues"
+                :key="image.file_id"
                 class="uploadedImageRow"
             >
                 <Image
-                    :key="index"
+                    :key="image.file_id"
                     class="uploadedImage"
                     :src="image.url"
                     :alt="image.name"
