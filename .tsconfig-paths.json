@@ -1,0 +1,16 @@
+{
+    "_comment": "This is a generated file. Do not edit directly.",
+    "compilerOptions": {
+        "paths": {
+            "@/arches/*": [
+                "./../arches/arches/app/src/arches/*"
+            ],
+            "@/arches_component_lab/*": [
+                "./arches_component_lab/src/arches_component_lab/*"
+            ],
+            "*": [
+                "./node_modules/*"
+            ]
+        }
+    }
+}
