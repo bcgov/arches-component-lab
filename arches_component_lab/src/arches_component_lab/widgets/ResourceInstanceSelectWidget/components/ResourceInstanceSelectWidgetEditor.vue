@@ -41,7 +41,7 @@ onMounted(async () => {
 });
 
 function clearOptions() {
-    options.value = props.initialValue || [];
+    options.value = props.initialValue ? [props.initialValue] : [];
 }
 
 function onFilter(event: MultiSelectFilterEvent) {
@@ -58,7 +58,7 @@ async function getOptions(page: number, filterTerm?: string) {
             props.nodeAlias,
             page,
             filterTerm,
-            props.initialValue,
+            props.initialValue ? [props.initialValue] : null,
         );
 
         const references = resourceData.data.map(
@@ -159,7 +159,7 @@ function validate(e: FormFieldResolverOptions) {
         v-slot="$field"
         :name="props.nodeAlias"
         :initial-value="
-            props.initialValue?.map((resource) => resource.resourceId)
+            props.initialValue?.resourceId
         "
         :resolver="resolver"
     >
