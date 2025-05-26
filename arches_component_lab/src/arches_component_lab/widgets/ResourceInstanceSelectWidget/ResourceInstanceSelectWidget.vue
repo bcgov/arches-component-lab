@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, useTemplateRef } from 'vue';
-import type { Ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 import Message from 'primevue/message';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -51,20 +50,6 @@ onMounted(async () => {
     }
 });
 
-const editor: Ref<ResourceInstanceSelectWidgetEditor | null> = useTemplateRef(
-    'editor',
-) as Ref<ResourceInstanceSelectWidgetEditor | null>;
-
-const viewer: Ref<ResourceInstanceSelectWidgetEditor | null> = useTemplateRef(
-    'viewer',
-) as Ref<ResourceInstanceSelectWidgetEditor | null>;
-
-
-const getOption = function(value: string) {
-    return (props.mode === EDIT) ?
-        editor.value?.getOption(value):
-            props.initialValue;
-}
 </script>
 
 <template>
@@ -79,7 +64,8 @@ const getOption = function(value: string) {
             <span v-if="nodeData.isrequired && props.mode === EDIT">*</span>
         </label>
 
-        <div v-if="mode === EDIT"
+        <div
+v-if="mode === EDIT"
              :class="[props.nodeAlias, props.graphSlug].join(' ')"
         >
             <ResourceInstanceSelectWidgetEditor
@@ -89,7 +75,8 @@ const getOption = function(value: string) {
                 :graph-slug="props.graphSlug"
             />
         </div>
-        <div v-if="mode === VIEW"
+        <div
+v-if="mode === VIEW"
              :class="[props.nodeAlias, props.graphSlug].join(' ')"
         >
             <ResourceInstanceSelectWidgetViewer :value="initialValue" />
