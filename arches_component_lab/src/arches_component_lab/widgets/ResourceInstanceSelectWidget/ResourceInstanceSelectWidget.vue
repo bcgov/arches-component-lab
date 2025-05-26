@@ -25,6 +25,7 @@ const props = withDefaults(
         nodeAlias: string;
         graphSlug: string;
         showLabel?: boolean;
+        businessValidator?: Function | null;
     }>(),
     {
         showLabel: true,
@@ -63,14 +64,19 @@ onMounted(async () => {
             <span v-if="nodeData.isrequired && props.mode === EDIT">*</span>
         </label>
 
-        <div v-if="mode === EDIT">
+        <div v-if="mode === EDIT"
+             :class="[props.nodeAlias, props.graphSlug].join(' ')"
+        >
             <ResourceInstanceSelectWidgetEditor
                 :initial-value="initialValue"
                 :node-alias="props.nodeAlias"
                 :graph-slug="props.graphSlug"
+                :business-validator="businessValidator"
             />
         </div>
-        <div v-if="mode === VIEW">
+        <div v-if="mode === VIEW"
+             :class="[props.nodeAlias, props.graphSlug].join(' ')"
+        >
             <ResourceInstanceSelectWidgetViewer :value="initialValue" />
         </div>
         <Message

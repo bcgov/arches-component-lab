@@ -22,6 +22,7 @@ const props = defineProps<{
     initialValue: typeof ResourceInstanceReference | null | undefined;
     graphSlug: string;
     nodeAlias: string;
+    businessValidator?: Function | null | undefined;
 }>();
 
 const { $gettext } = useGettext();
@@ -144,7 +145,12 @@ function resolver(e: FormFieldResolverOptions) {
 
 function validate(e: FormFieldResolverOptions) {
     console.log('validate', e);
+    if (props.businessValidator) {
+        props.businessValidator(e);
+    }
 }
+
+defineExpose({getOption})
 </script>
 
 <template>
