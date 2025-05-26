@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 
-import Message from 'primevue/message';
-import ProgressSpinner from 'primevue/progressspinner';
+import Message from "primevue/message";
+import ProgressSpinner from "primevue/progressspinner";
 
-import ResourceInstanceSelectWidgetEditor from '@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetEditor.vue';
-import ResourceInstanceSelectWidgetViewer from '@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetViewer.vue';
+import ResourceInstanceSelectWidgetEditor from "@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetEditor.vue";
+import ResourceInstanceSelectWidgetViewer from "@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetViewer.vue";
 
 import {
     fetchWidgetData,
     fetchNodeData,
-} from '@/arches_component_lab/widgets/api.ts';
-import { EDIT, VIEW } from '@/arches_component_lab/widgets/constants.ts';
+} from "@/arches_component_lab/widgets/api.ts";
+import { EDIT, VIEW } from "@/arches_component_lab/widgets/constants.ts";
 
 import type {
     ResourceInstanceReference,
     WidgetMode,
-} from '@/arches_component_lab/widgets/types.ts';
+} from "@/arches_component_lab/widgets/types.ts";
 
 const props = withDefaults(
     defineProps<{
@@ -49,7 +49,6 @@ onMounted(async () => {
         isLoading.value = false;
     }
 });
-
 </script>
 
 <template>
@@ -65,8 +64,8 @@ onMounted(async () => {
         </label>
 
         <div
-v-if="mode === EDIT"
-             :class="[props.nodeAlias, props.graphSlug].join(' ')"
+            v-if="mode === EDIT"
+            :class="[props.nodeAlias, props.graphSlug].join(' ')"
         >
             <ResourceInstanceSelectWidgetEditor
                 ref="editor"
@@ -76,8 +75,8 @@ v-if="mode === EDIT"
             />
         </div>
         <div
-v-if="mode === VIEW"
-             :class="[props.nodeAlias, props.graphSlug].join(' ')"
+            v-if="mode === VIEW"
+            :class="[props.nodeAlias, props.graphSlug].join(' ')"
         >
             <ResourceInstanceSelectWidgetViewer :value="initialValue" />
         </div>

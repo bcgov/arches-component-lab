@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from "vue";
 
-import { useGettext } from 'vue3-gettext';
-import { FormField } from '@primevue/forms';
+import { useGettext } from "vue3-gettext";
+import { FormField } from "@primevue/forms";
 
-import Message from 'primevue/message';
-import Select from 'primevue/select';
+import Message from "primevue/message";
+import Select from "primevue/select";
 
-import { fetchRelatableResources } from '@/arches_component_lab/widgets/api.ts';
+import { fetchRelatableResources } from "@/arches_component_lab/widgets/api.ts";
 
-import type { MultiSelectFilterEvent } from 'primevue/multiselect';
-import type { FormFieldResolverOptions } from '@primevue/forms';
-import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
+import type { MultiSelectFilterEvent } from "primevue/multiselect";
+import type { FormFieldResolverOptions } from "@primevue/forms";
+import type { VirtualScrollerLazyEvent } from "primevue/virtualscroller";
 
 import type {
     ResourceInstanceReference,
     ResourceInstanceResult,
-} from '@/arches_component_lab/widgets/types.ts';
+} from "@/arches_component_lab/widgets/types.ts";
 
 const props = defineProps<{
     initialValue: ResourceInstanceReference | null | undefined;
@@ -67,8 +67,8 @@ async function getOptions(page: number, filterTerm?: string) {
             ): ResourceInstanceReference => ({
                 display_value: resourceRecord.display_value,
                 resourceId: resourceRecord.resourceinstanceid,
-                ontologyProperty: '',
-                inverseOntologyProperty: '',
+                ontologyProperty: "",
+                inverseOntologyProperty: "",
             }),
         );
 
@@ -138,9 +138,8 @@ function resolver(e: FormFieldResolverOptions) {
 }
 
 function validate(e: FormFieldResolverOptions) {
-    console.log('validate', e);
+    console.log("validate", e);
 }
-
 </script>
 
 <template>
@@ -154,9 +153,7 @@ function validate(e: FormFieldResolverOptions) {
         v-else
         v-slot="$field"
         :name="props.nodeAlias"
-        :initial-value="
-            props.initialValue?.resourceId
-        "
+        :initial-value="props.initialValue?.resourceId"
         :resolver="resolver"
     >
         <Select
