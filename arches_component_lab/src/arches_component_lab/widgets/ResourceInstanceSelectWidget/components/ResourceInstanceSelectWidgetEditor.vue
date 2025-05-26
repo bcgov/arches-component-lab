@@ -22,7 +22,6 @@ const props = defineProps<{
     initialValue: typeof ResourceInstanceReference | null | undefined;
     graphSlug: string;
     nodeAlias: string;
-    businessValidator?: Function | null | undefined;
 }>();
 
 const { $gettext } = useGettext();
@@ -121,8 +120,7 @@ async function onLazyLoadResources(event?: VirtualScrollerLazyEvent) {
 }
 
 function getOption(value: string): ResourceInstanceReference | undefined {
-    const option = options.value.find((option) => option.resourceId == value);
-    return option;
+    return options.value.find((option) => option.resourceId == value);
 }
 
 function resolver(e: FormFieldResolverOptions) {
@@ -145,12 +143,8 @@ function resolver(e: FormFieldResolverOptions) {
 
 function validate(e: FormFieldResolverOptions) {
     console.log('validate', e);
-    if (props.businessValidator) {
-        props.businessValidator(e);
-    }
 }
 
-defineExpose({getOption})
 </script>
 
 <template>

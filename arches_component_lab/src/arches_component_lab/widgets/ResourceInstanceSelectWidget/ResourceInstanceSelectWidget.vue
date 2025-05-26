@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, useTemplateRef } from 'vue';
+import type { Ref } from 'vue';
 
 import Message from 'primevue/message';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -25,7 +26,6 @@ const props = withDefaults(
         nodeAlias: string;
         graphSlug: string;
         showLabel?: boolean;
-        businessValidator?: Function | null;
     }>(),
     {
         showLabel: true,
@@ -50,6 +50,21 @@ onMounted(async () => {
         isLoading.value = false;
     }
 });
+
+const editor: Ref<ResourceInstanceSelectWidgetEditor | null> = useTemplateRef(
+    'editor',
+) as Ref<ResourceInstanceSelectWidgetEditor | null>;
+
+const viewer: Ref<ResourceInstanceSelectWidgetEditor | null> = useTemplateRef(
+    'viewer',
+) as Ref<ResourceInstanceSelectWidgetEditor | null>;
+
+
+const getOption = function(value: string) {
+    return (props.mode === EDIT) ?
+        editor.value?.getOption(value):
+            props.initialValue;
+}
 </script>
 
 <template>
@@ -68,10 +83,10 @@ onMounted(async () => {
              :class="[props.nodeAlias, props.graphSlug].join(' ')"
         >
             <ResourceInstanceSelectWidgetEditor
+                ref="editor"
                 :initial-value="initialValue"
                 :node-alias="props.nodeAlias"
                 :graph-slug="props.graphSlug"
-                :business-validator="businessValidator"
             />
         </div>
         <div v-if="mode === VIEW"
