@@ -19,7 +19,7 @@ import type {
 } from '@/arches_component_lab/widgets/types.ts';
 
 const props = defineProps<{
-    initialValue: typeof ResourceInstanceReference | null | undefined;
+    initialValue: ResourceInstanceReference | null | undefined;
     graphSlug: string;
     nodeAlias: string;
 }>();
