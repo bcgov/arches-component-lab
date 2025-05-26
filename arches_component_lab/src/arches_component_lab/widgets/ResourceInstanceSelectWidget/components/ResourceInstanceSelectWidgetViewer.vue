@@ -8,12 +8,12 @@ const props = defineProps<{
 </script>
 <template>
     <div
-        :key="props.value.resourceId"
+        :key="props.value?.resourceId"
     >
         <a
-            :href="`${arches.urls.resource_editor}${props.value.resourceId}`"
+            :href="`${arches.urls.resource_editor}${props.value?.resourceId}`"
         >
-            {{ props.value.display_value }}
+            {{ props.value?.display_value }}
         </a>
     </div>
 </template>
