@@ -119,10 +119,6 @@ async function onLazyLoadResources(event?: VirtualScrollerLazyEvent) {
     await getOptions((resourceResultsPage.value || 0) + 1);
 }
 
-function getOption(value: string): ResourceInstanceReference | undefined {
-    return options.value.find((option) => option.resourceId == value);
-}
-
 function resolver(e: FormFieldResolverOptions) {
     validate(e);
 
