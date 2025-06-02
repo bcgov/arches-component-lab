@@ -1,26 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
 
-import Message from "primevue/message";
-import ProgressSpinner from "primevue/progressspinner";
-
-import ResourceInstanceSelectWidgetEditor from "@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetEditor.vue";
-import ResourceInstanceSelectWidgetViewer from "@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetViewer.vue";
-
-import {
-    fetchWidgetData,
-    fetchNodeData,
-} from "@/arches_component_lab/widgets/api.ts";
-import { EDIT, VIEW } from "@/arches_component_lab/widgets/constants.ts";
+import ResourceInstanceSelectWidgetEditor from '@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetEditor.vue';
+import ResourceInstanceSelectWidgetViewer from '@/arches_component_lab/widgets/ResourceInstanceSelectWidget/components/ResourceInstanceSelectWidgetViewer.vue';
+import WidgetContainer from '@/arches_component_lab/widgets/WidgetContainer/WidgetContainer.vue'
 
 import type {
     ResourceInstanceReference,
     WidgetMode,
-} from "@/arches_component_lab/widgets/types.ts";
+} from '@/arches_component_lab/widgets/types.ts';
 
 const props = withDefaults(
     defineProps<{
-        mode: WidgetMode;
+        mode: typeof WidgetMode;
         initialValue: ResourceInstanceReference | null | undefined;
         nodeAlias: string;
         graphSlug: string;
@@ -31,57 +22,26 @@ const props = withDefaults(
     },
 );
 
-const isLoading = ref(true);
-const nodeData = ref();
-const widgetData = ref();
-const configurationError = ref();
-
-onMounted(async () => {
-    try {
-        widgetData.value = await fetchWidgetData(
-            props.graphSlug,
-            props.nodeAlias,
-        );
-        nodeData.value = await fetchNodeData(props.graphSlug, props.nodeAlias);
-    } catch (error) {
-        configurationError.value = error;
-    } finally {
-        isLoading.value = false;
-    }
-});
 </script>
 
 <template>
-    <ProgressSpinner
-        v-if="isLoading"
-        style="width: 2em; height: 2em"
-    />
-
-    <template v-else>
-        <label v-if="props.showLabel">
-            <span>{{ widgetData.label }}</span>
-            <span v-if="nodeData.isrequired && props.mode === EDIT">*</span>
-        </label>
-
-        <div :class="[props.nodeAlias, props.graphSlug].join(' ')">
+    <WidgetContainer
+        :mode=props.mode
+        :initial-value=props.initialValue
+        :node-alias=props.nodeAlias
+        :graph-slug=props.graphSlug
+        :show-label=props.showLabel
+    >
+        <template v-slot:editWidget>
             <ResourceInstanceSelectWidgetEditor
-                v-if="mode === EDIT"
-                ref="editor"
                 :initial-value="initialValue"
-                :node-alias="props.nodeAlias"
-                :graph-slug="props.graphSlug"
+                :node-alias="nodeAlias"
+                :graph-slug="graphSlug"
             />
+        </template>
+        <template v-slot:viewWidget>
             <ResourceInstanceSelectWidgetViewer
-                v-else-if="mode === VIEW"
-                :value="initialValue"
-            />
-        </div>
-        <Message
-            v-if="configurationError"
-            severity="error"
-            size="small"
-        >
-            {{ configurationError.message }}
-        </Message>
-    </template>
+                :value="initialValue" />
+        </template>
+    </WidgetContainer>
 </template>
