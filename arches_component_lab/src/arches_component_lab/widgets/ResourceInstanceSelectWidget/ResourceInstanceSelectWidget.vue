@@ -25,23 +25,8 @@ const props = withDefaults(
 </script>
 
 <template>
-    <WidgetContainer
-        :mode=props.mode
-        :initial-value=props.initialValue
-        :node-alias=props.nodeAlias
-        :graph-slug=props.graphSlug
-        :show-label=props.showLabel
-    >
-        <template v-slot:editWidget>
             <ResourceInstanceSelectWidgetEditor
                 :initial-value="initialValue"
-                :node-alias="nodeAlias"
-                :graph-slug="graphSlug"
             />
         </template>
-        <template v-slot:viewWidget>
-            <ResourceInstanceSelectWidgetViewer
-                :value="initialValue" />
-        </template>
-    </WidgetContainer>
 </template>

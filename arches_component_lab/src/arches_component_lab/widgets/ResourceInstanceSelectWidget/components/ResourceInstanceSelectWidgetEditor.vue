@@ -149,7 +149,6 @@ function validate(e: FormFieldResolverOptions) {
         v-else
         v-slot="$field"
         :name="props.nodeAlias"
-        :initial-value="props.initialValue?.resourceId"
         :resolver="resolver"
     >
         <Select
