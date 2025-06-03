@@ -36,7 +36,9 @@ const fetchError = ref<string | null>(null);
 
 const resourceResultsCurrentCount = computed(() => options.value.length);
 
+const currentValue = defineModel<ResourceInstanceReference>();
 onMounted(async () => {
+    currentValue.value = props.initialValue;
     await getOptions(1);
 });
 
@@ -118,17 +120,20 @@ async function onLazyLoadResources(event?: VirtualScrollerLazyEvent) {
 
     await getOptions((resourceResultsPage.value || 0) + 1);
 }
-
+function getOption(resourceId: string) {
+    return options.value.find((option) => {
+        return resourceId && resourceId === option.resourceId;
+    });
+}
 function resolver(e: FormFieldResolverOptions) {
     validate(e);
 
-    let value = e.value;
+    const selectedOption = getOption(e.value);
+    currentValue.value = selectedOption;
 
     return {
         values: {
-            [props.nodeAlias]: options.value.find((option) => {
-                return value && value === option.resourceId;
-            }),
+            [props.nodeAlias]: selectedOption?.resourceId,
         },
     };
 }

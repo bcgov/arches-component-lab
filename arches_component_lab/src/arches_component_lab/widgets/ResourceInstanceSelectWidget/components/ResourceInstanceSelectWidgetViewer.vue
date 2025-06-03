@@ -5,6 +5,8 @@ import type { ResourceInstanceReference } from "@/arches_component_lab/widgets/t
 const props = defineProps<{
     value?: ResourceInstanceReference | null | undefined;
 }>();
+
+const currentValue = defineModel<ResourceInstanceReference | null>();
 </script>
 <template>
     <div :key="props.value?.resourceId">

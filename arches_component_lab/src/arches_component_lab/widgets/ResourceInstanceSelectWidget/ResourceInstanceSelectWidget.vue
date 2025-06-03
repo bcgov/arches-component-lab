@@ -9,6 +9,9 @@ import type {
     WidgetMode,
 } from '@/arches_component_lab/widgets/types.ts';
 
+import { ref } from 'vue';
+import type {  Ref } from 'vue';
+
 const props = withDefaults(
     defineProps<{
         mode: typeof WidgetMode;
@@ -22,6 +25,12 @@ const props = withDefaults(
     },
 );
 
+const currentValue: Ref<ResourceInstanceReference> = ref();
+function getCurrentValue()
+{
+    return currentValue.value;
+}
+defineExpose({getCurrentValue})
 </script>
 
 <template>
@@ -34,6 +43,7 @@ const props = withDefaults(
     >
         <template v-slot:editWidget>
             <ResourceInstanceSelectWidgetEditor
+                v-model="currentValue"
                 :initial-value="initialValue"
                 :node-alias="nodeAlias"
                 :graph-slug="graphSlug"
@@ -41,6 +51,7 @@ const props = withDefaults(
         </template>
         <template v-slot:viewWidget>
             <ResourceInstanceSelectWidgetViewer
+                v-model="currentValue"
                 :value="initialValue" />
         </template>
     </WidgetContainer>
