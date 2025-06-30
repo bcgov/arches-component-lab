@@ -35,8 +35,8 @@ For developer install instructions, see the [Developer Setup](#developer-setup-f
 3. Next ensure arches and arches_component_lab are included as dependencies in package.json
     ```
     "dependencies": {
-        "arches": "archesproject/arches#dev/8.0.x",
-        "arches_component_lab": "archesproject/arches-component-lab#main"
+        "arches": "archesproject/arches#stable/8.0.1",
+        "arches_component_lab": "archesproject/arches-component-lab#alpha/0.0.1a0"
     }
     ```
 
