@@ -3,10 +3,12 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "arches_component_lab"
+name = "arches-component-lab"
 readme = "README.md"
-authors = []
-license = {text = "GNU AGPL3"}
+authors = [
+    {"name" = "Arches Project"}
+]
+license = "AGPL-3.0-or-later"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Programming Language :: Python",
@@ -27,7 +29,7 @@ dependencies = [
     "arches>=7.6.9",
     "arches_querysets @ git+https://github.com/archesproject/arches-querysets@main",
 ]
-version = "0.0.1"
+version = "0.0.1a1"
 
 [project.optional-dependencies]
 dev = [
@@ -38,6 +40,12 @@ dev = [
     "pre-commit==3.8.0",
     "black==24.4.2",
 ]
+
+[project.urls]
+Homepage = "https://archesproject.org/"
+Documentation = "https://arches.readthedocs.io"
+Repository = "https://github.com/archesproject/arches-component-lab.git"
+Issues = "https://github.com/archesproject/arches-component-lab/issues"
 
 [tool.setuptools]
 packages = ["arches_component_lab"]
