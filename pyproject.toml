@@ -27,7 +27,7 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
     "arches>=7.6.9",
-    "arches_querysets @ git+https://github.com/archesproject/arches-querysets@main",
+    "arches_querysets[drf] @ git+https://github.com/archesproject/arches-querysets@main",
 ]
 version = "0.0.1a0"
 
