@@ -20,11 +20,11 @@
     },
     "dependencies": {
         "@primevue/forms": "4.3.3",
-        "arches": "archesproject/arches#stable/8.0.1",
+        "arches": "archesproject/arches#dev/8.0.x",
         "dayjs": "^1.11.13"
     },
     "devDependencies": {
-        "arches-dev-dependencies": "archesproject/arches-dev-dependencies#stable/8.0.1"
+        "arches-dev-dependencies": "archesproject/arches-dev-dependencies#dev/8.0.x"
     },
     "nodeModulesPaths": {},
     "overrides": {
