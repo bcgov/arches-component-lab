@@ -21,14 +21,15 @@ For developer install instructions, see the [Developer Setup](#developer-setup-f
 
 1. If you don't already have an Arches project, you'll need to create one by following the instructions in the Arches [documentation](http://archesproject.org/documentation/).
 
-2. When your project is ready, add "arches_querysets", "arches_component_lab", and "pgtrigger" to INSTALLED_APPS **below** the name of your project:
-    ```
+2. When your project is ready, add "arches_querysets", "arches_component_lab" to INSTALLED_APPS **below** the name of your project. 
+For projects using Arches >= 8.x also add "pgtrigger" as follows:
+```python
     INSTALLED_APPS = (
         ...
         "my_project_name",
         "arches_querysets",
         "arches_component_lab",
-        "pgtrigger",
+        "pgtrigger",             # Only when using Arches >= 8.x
     )
     ```
 
